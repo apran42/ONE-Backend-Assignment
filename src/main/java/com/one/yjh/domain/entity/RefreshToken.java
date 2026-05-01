@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,32 +19,32 @@ import java.time.LocalDateTime;
 public class RefreshToken {
 
     @Id
-    private long user_id;
+    @Column(name = "user_id")
+    private long userId;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @Column(nullable = false, length = 500)
-    private String token_value;
+    @Column(name = "token_value", nullable = false, length = 500)
+    private String tokenValue;
 
-    @Column(nullable = false)
-    private LocalDateTime expired_at;
+    @Column(name = "expired_at",nullable = false)
+    private LocalDateTime expiredAt;
 
     @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime created_at;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime updated_at;
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
     @Builder
-    public RefreshToken(Users user, String token_value, LocalDateTime expired_at) {
+    public RefreshToken(Users user, String tokenValue, LocalDateTime expiredAt) {
         this.user = user;
-        this.token_value = token_value;
-        this.expired_at = expired_at;
+        this.tokenValue = tokenValue;
+        this.expiredAt = expiredAt;
     }
-
 }
