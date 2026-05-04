@@ -4,6 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * 모든 API 응답에 사용하는 공통 응답 규격<br>
+ * 클라이언트와의 일관된 통신을 위해 성공/실패 모두 같은 형식을 따르도록 규격화하였음<br>
+ * success 변수를 톰해 성공 여부를 전달하고,<br>
+ * 제네릭 타입의 유연한 데이터를 넘기도록 구현하였음
+ * */
 @Getter
 @AllArgsConstructor
 @Builder

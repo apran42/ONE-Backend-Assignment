@@ -4,6 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 커스텀 에러 코드<br>
+ * 기존의 HTTP 메서드 코드로 얻을 수 있는 에러는 한정되어있어서<br>
+ * 각 로직에서 자주 발생하는 에러들을 설정하여 더 자세한 정보를<br>
+ * 클라이언트에게 넘겨 오류를 더 쉽게 찾을 수 있도록 구성함
+ * */
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
