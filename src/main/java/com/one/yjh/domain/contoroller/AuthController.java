@@ -6,7 +6,6 @@ import com.one.yjh.domain.dto.TokenResponse;
 import com.one.yjh.domain.service.AuthService;
 import com.one.yjh.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

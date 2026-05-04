@@ -40,7 +40,6 @@ public class AuthService {
      * dto를 통해 받은 request 객체에서 이메일(아이디 대용)과 비밀 번호 정보를 활용해 <br>
      * 유저 존재 여부와 비밀 번호 일치 여부를 검사 <br>
      * JWT 원칙에 맞게 로그인 시마다 이미 받은 리프레시 토큰이 있다면 삭제 후 새로운 토큰 저장
-     * @return
      */
     // 로그인
     public TokenResponse login(LoginRequest request) {
