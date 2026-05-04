@@ -4,6 +4,7 @@ import com.one.yjh.domain.entity.Users;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JwtProvider {
 
@@ -69,13 +71,13 @@ public class JwtProvider {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
-            System.out.println("만료된 토큰입니다.");
+            log.warn("만료된 토큰입니다.");
         } catch (UnsupportedJwtException e) {
-            System.out.println("지원되지 않은 형식의 토큰입니다");
+            log.warn("지원되지 않은 형식의 토큰입니다");
         } catch (SecurityException | MalformedJwtException e) {
-            System.out.println("잘못된 JWT 서명입니다.");
+            log.error("잘못된 JWT 서명입니다.");
         } catch (IllegalArgumentException e) {
-            System.out.println("JWT 토큰이 잘못되었습니다.");
+            log.error("JWT 토큰이 잘못되었습니다.");
         }
         return false;
     }
