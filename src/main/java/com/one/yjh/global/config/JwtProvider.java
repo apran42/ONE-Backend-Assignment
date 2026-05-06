@@ -1,6 +1,8 @@
 package com.one.yjh.global.config;
 
 import com.one.yjh.domain.entity.Users;
+import com.one.yjh.global.exception.CustomException;
+import com.one.yjh.global.exception.ErrorCode;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -72,14 +74,17 @@ public class JwtProvider {
             return true;
         } catch (ExpiredJwtException e) {
             log.warn("만료된 토큰입니다.");
+            throw new CustomException(ErrorCode.EXPIRED_TOKEN);
         } catch (UnsupportedJwtException e) {
             log.warn("지원되지 않은 형식의 토큰입니다");
+            throw new CustomException(ErrorCode.UNSUPPORTED_TOKEN);
         } catch (SecurityException | MalformedJwtException e) {
             log.error("잘못된 JWT 서명입니다.");
+            throw new CustomException(ErrorCode.INVALID_TOKEN);
         } catch (IllegalArgumentException e) {
             log.error("JWT 토큰이 잘못되었습니다.");
+            throw new CustomException(ErrorCode.EMPTY_TOKEN);
         }
-        return false;
     }
 
     // 토큰 내의 정보를 추출
