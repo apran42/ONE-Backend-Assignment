@@ -10,6 +10,7 @@ import com.one.yjh.domain.repository.UsersRepository;
 import com.one.yjh.global.config.JwtProvider;
 
 import com.one.yjh.global.exception.CustomException;
+import com.one.yjh.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -91,6 +92,10 @@ public class AuthService {
      */
     // 회원가입
     public void signup(SignupRequest request) {
+        if (usersRepository.existsByEmail(request.email())) {
+            throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
+        }
+
         Users users = Users.builder()
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
