@@ -1,4 +1,4 @@
-package com.one.yjh.domain.contoroller;
+package com.one.yjh.domain.controller;
 
 import com.one.yjh.domain.dto.UserResponse;
 import com.one.yjh.domain.service.UserService;
