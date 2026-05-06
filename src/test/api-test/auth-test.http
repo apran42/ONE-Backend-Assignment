@@ -1,0 +1,51 @@
+### 회원가입 테스트
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "password123",
+  "nickname": "테스터"
+}
+
+### 로그인 테스트
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "password123"
+}
+> {%
+    // 응답 데이터에서 고유 식별자, 액세스 토큰, 리프레시 토큰을 전역변수에 저장
+    client.global.set("id", response.body.data.id);
+    client.global.set("accessToken", response.body.data.accessToken);
+    client.global.set("refreshToken", response.body.data.refreshToken);
+ %}
+
+### 로그아웃 테스트
+POST http://localhost:8080/api/auth/logout
+Content-Type: application/json
+
+{
+    "id": {{id}}
+}
+
+### 토큰 재발급 테스트
+POST http://localhost:8080/api/auth/reissue
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+> {%
+    // 응답이 성공하면 전역변수에 새로 받은 토큰 값과 고유 식별자 저장
+    if (response.status == 200 && response.body.data) {
+        client.global.set("accessToken", response.body.data.accessToken);
+        client.global.set("refreshToken", response.body.data.refreshToken);
+        client.global.set("id", response.body.data.id);
+        client.log("토큰 갱신 성공");
+    } else
+        client.log("토큰 갱신 실패: " + response.body.message);
+
+%}
