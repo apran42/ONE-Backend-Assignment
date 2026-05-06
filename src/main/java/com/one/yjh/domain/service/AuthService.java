@@ -10,6 +10,7 @@ import com.one.yjh.domain.repository.UsersRepository;
 import com.one.yjh.global.config.JwtProvider;
 
 import com.one.yjh.global.exception.CustomException;
+import com.one.yjh.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,15 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     /**
+     * 로그인 시 새로운 액세스 토큰과 리프레시 토큰을 발급<br>
      *
-     * @param request
+     * @param request 클라이언트에서 입력한 아이디와 비밀번호를 담은 request 객체<br>
      * dto를 통해 받은 request 객체에서 이메일(아이디 대용)과 비밀 번호 정보를 활용해 <br>
      * 유저 존재 여부와 비밀 번호 일치 여부를 검사 <br>
-     * JWT 원칙에 맞게 로그인 시마다 이미 받은 리프레시 토큰이 있다면 삭제 후 새로운 토큰 저장
+     * JWT 원칙에 맞게 로그인 시마다 이미 받은 리프레시 토큰이 있다면 삭제 후 새로운 토큰 저장<br>
+     * @throws CustomException 사용자를 찾을 수 없거나 비밀번호가 일치하지 않을 때<br>
+     * @return 로그인 시 마다 기존의 refreshToken 교체
+     *
      */
     // 로그인
     public TokenResponse login(LoginRequest request) {
@@ -85,12 +90,18 @@ public class AuthService {
     }
 
     /**
+     * request 객체를 통해 받은 새로운 유저 정보를 저장<br>
      *
-     * @param request
-     * request 객체를 통해 받은 새로운 유저 정보를 저장
+     * @param request 클라이언트에서 입력받은 새로운 유저의 정보<br>
+     * @throws CustomException 이미 존재하는 이메일인 경우 발생
+     *
      */
     // 회원가입
     public void signup(SignupRequest request) {
+        if (usersRepository.existsByEmail(request.email())) {
+            throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
+        }
+
         Users users = Users.builder()
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
