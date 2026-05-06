@@ -1,8 +1,6 @@
-package com.one.yjh.domain.contoroller;
+package com.one.yjh.domain.controller;
 
-import com.one.yjh.domain.dto.LoginRequest;
-import com.one.yjh.domain.dto.SignupRequest;
-import com.one.yjh.domain.dto.TokenResponse;
+import com.one.yjh.domain.dto.*;
 import com.one.yjh.domain.service.AuthService;
 import com.one.yjh.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +25,6 @@ public class AuthController {
     @PostMapping("/login")
     public ApiResponse<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
         TokenResponse tokenResponse = authService.login(loginRequest);
-
         return ApiResponse.success("로그인되었습니다", tokenResponse);
     }
 
@@ -36,5 +33,19 @@ public class AuthController {
     public ApiResponse<String> signup(@RequestBody SignupRequest signupRequest) {
         authService.signup(signupRequest);
         return ApiResponse.success("회원가입이 완료되었습니다.",null);
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout(@RequestBody LogoutRequest logoutRequest) {
+        authService.logout(logoutRequest);
+        return ApiResponse.success("로그아웃되었습니다.",null);
+    }
+
+    // 토큰 재발급
+    @PostMapping("/reissue")
+    public ApiResponse<TokenResponse> reissue(@RequestBody ReissueRequest reissueRequest) {
+        TokenResponse tokenResponse = authService.reissue(reissueRequest);
+        return ApiResponse.success("토큰이 재발급되었습니다.", tokenResponse);
     }
 }
