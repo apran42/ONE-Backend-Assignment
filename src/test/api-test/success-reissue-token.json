@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "message": "토큰이 재발급되었습니다.",
+  "data": {
+    "id": 5,
+    "accessToken": "{{accessToken}}",
+    "refreshToken": "{{refreshToken}}"
+  }
+}
