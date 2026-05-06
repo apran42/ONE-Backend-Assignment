@@ -50,4 +50,8 @@ public class RefreshToken {
         this.tokenValue = tokenValue;
         this.expiredAt = expiredAt;
     }
+
+    public void updateTokenValue(String newRefreshToken) {
+        this.tokenValue = newRefreshToken;
+    }
 }
