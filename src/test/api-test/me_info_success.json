@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "message": "요청에 성공하였습니다",
+  "data": {
+    "id": 5,
+    "email": "tester@test.com",
+    "nickname": "테스터"
+  }
+}
