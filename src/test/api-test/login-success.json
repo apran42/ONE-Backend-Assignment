@@ -1,8 +1,0 @@
-{
-  "success": true,
-  "message": "로그인되었습니다",
-  "data": {
-    "accessToken": "{{accessToken}}",
-    "refreshToken": "{{refreshToken}}"
-  }
-}

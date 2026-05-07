@@ -1,12 +1,12 @@
-package com.one.yjh.domain.service;
+package com.one.yjh.user.service;
 
-import com.one.yjh.domain.dto.LoginRequest;
-import com.one.yjh.domain.dto.SignupRequest;
-import com.one.yjh.domain.dto.TokenResponse;
-import com.one.yjh.domain.entity.RefreshToken;
-import com.one.yjh.domain.entity.Users;
-import com.one.yjh.domain.repository.RefreshTokenRepository;
-import com.one.yjh.domain.repository.UsersRepository;
+import com.one.yjh.user.dto.request.LoginRequest;
+import com.one.yjh.user.dto.request.SignupRequest;
+import com.one.yjh.user.dto.response.TokenResponse;
+import com.one.yjh.user.entity.RefreshToken;
+import com.one.yjh.user.entity.Users;
+import com.one.yjh.user.repository.RefreshTokenRepository;
+import com.one.yjh.user.repository.UsersRepository;
 import com.one.yjh.global.config.JwtProvider;
 
 import com.one.yjh.global.exception.CustomException;

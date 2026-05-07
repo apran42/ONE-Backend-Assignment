@@ -1,4 +1,4 @@
-package com.one.yjh.domain.dto;
+package com.one.yjh.user.dto.response;
 
 import lombok.Builder;
 

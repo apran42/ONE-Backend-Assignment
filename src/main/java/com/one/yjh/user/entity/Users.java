@@ -1,4 +1,4 @@
-package com.one.yjh.domain.entity;
+package com.one.yjh.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -22,13 +22,13 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(unique = true, nullable = false, length = 50)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String nickname;
 
     @CreatedDate

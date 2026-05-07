@@ -1,6 +1,6 @@
 package com.one.yjh.global.config;
 
-import com.one.yjh.domain.entity.Users;
+import com.one.yjh.user.entity.Users;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -29,7 +29,7 @@ public class JwtProvider {
 
     @PostConstruct
     protected void init() {
-        byte[] keyBytes = Base64.getEncoder().encode(secret.getBytes());
+        byte[] keyBytes = Base64.getDecoder().decode(secret.getBytes());
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 

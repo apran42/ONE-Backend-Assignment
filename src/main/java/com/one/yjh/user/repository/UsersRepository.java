@@ -1,7 +1,6 @@
-package com.one.yjh.domain.repository;
+package com.one.yjh.user.repository;
 
-import com.one.yjh.domain.entity.Users;
-import lombok.NonNull;
+import com.one.yjh.user.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

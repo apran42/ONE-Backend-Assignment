@@ -1,10 +1,11 @@
-package com.one.yjh.domain.contoroller;
+package com.one.yjh.user.controller;
 
-import com.one.yjh.domain.dto.LoginRequest;
-import com.one.yjh.domain.dto.SignupRequest;
-import com.one.yjh.domain.dto.TokenResponse;
-import com.one.yjh.domain.service.AuthService;
+import com.one.yjh.user.dto.request.LoginRequest;
+import com.one.yjh.user.dto.request.SignupRequest;
+import com.one.yjh.user.dto.response.TokenResponse;
+import com.one.yjh.user.service.AuthService;
 import com.one.yjh.global.response.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class AuthController {
 
     // 로그인 API
     @PostMapping("/login")
-    public ApiResponse<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ApiResponse<TokenResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         TokenResponse tokenResponse = authService.login(loginRequest);
 
         return ApiResponse.success("로그인되었습니다", tokenResponse);
@@ -33,7 +34,7 @@ public class AuthController {
 
     // 회원 가입 API
     @PostMapping("/signup")
-    public ApiResponse<String> signup(@RequestBody SignupRequest signupRequest) {
+    public ApiResponse<String> signup(@Valid @RequestBody SignupRequest signupRequest) {
         authService.signup(signupRequest);
         return ApiResponse.success("회원가입이 완료되었습니다.",null);
     }
