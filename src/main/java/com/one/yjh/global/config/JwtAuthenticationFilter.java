@@ -41,10 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 토큰이 있으면 "Bearer "을 제거
             if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer "))
                 token = bearerToken.substring(7);
-            // 토큰이 없으면
-            if (token == null)
-                request.setAttribute("exception", ErrorCode.TOKEN_NOT_FOUND);
-            else if (jwtProvider.validateToken(token)) {
+
+            if (token != null && jwtProvider.validateToken(token)) {
                 Long userId = jwtProvider.getUserId(token);
                 Authentication auth = new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
                 SecurityContextHolder.getContext().setAuthentication(auth);

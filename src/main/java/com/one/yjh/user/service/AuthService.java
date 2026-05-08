@@ -64,21 +64,11 @@ public class AuthService {
         refreshTokenRepository.findById(users.getId())
                 .ifPresent(refreshTokenRepository::delete); // 이미 리프레시 토큰이 존재하면 삭제
 
-        RefreshToken rToken = refreshTokenRepository.findById(users.getId())
-                        .map(existingToken -> {
-                            // 기존 토큰 존재
-                            return RefreshToken.builder()
-                                    .user(users)
-                                    .tokenValue(refreshToken)
-                                    .expiredAt(expiryDate)
-                                    .build();
-                        })
-                        .orElseGet(() -> RefreshToken.builder()
-                                .user(users)
-                                .tokenValue(refreshToken)
-                                .expiredAt(expiryDate)
-                                .build());
-
+        RefreshToken rToken = RefreshToken.builder()
+                .user(users)
+                .tokenValue(refreshToken)
+                .expiredAt(expiryDate)
+                .build();
         refreshTokenRepository.save(rToken);
 
         // DTO에 담아 반환

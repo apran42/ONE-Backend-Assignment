@@ -29,13 +29,13 @@ public class AuthController {
     public ApiResponse<TokenResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         TokenResponse tokenResponse = authService.login(loginRequest);
 
-        return ApiResponse.success("로그인되었습니다", tokenResponse);
+        return ApiResponse.success(tokenResponse);
     }
 
     // 회원 가입 API
     @PostMapping("/signup")
     public ApiResponse<String> signup(@Valid @RequestBody SignupRequest signupRequest) {
         authService.signup(signupRequest);
-        return ApiResponse.success("회원가입이 완료되었습니다.",null);
+        return ApiResponse.success(null);
     }
 }
